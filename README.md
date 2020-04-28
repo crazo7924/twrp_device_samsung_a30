@@ -4,9 +4,14 @@
 
 To build:
 
-`. build/envsetup.sh
-lunch omni_a30-eng
-m recoveryimage`
+setup envirnoment
+`. build/envsetup.sh`
+
+then prepare
+`lunch omni_a30-eng`
+
+make the image
+`m recoveryimage`
 
 ## How to find the image built
 
