@@ -37,7 +37,7 @@ ENABLE_SCHEDBOOST := true
 ALLOW_MISSING_DEPENDENCIES=true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal7885
+TARGET_BOOTLOADER_BOARD_NAME := universal7904
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
@@ -99,4 +99,28 @@ TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 PLATFORM_SECURITY_PATCH := 2025-12-31
 
-
+# SHRP-specific flags
+SHRP_PATH := device/samsung/a30
+# Maintainer name
+SHRP_MAINTAINER := crazo7924
+# Device codename
+SHRP_DEVICE_CODE := a30
+# Storage paths
+SHRP_EXTERNAL := /external_sd
+SHRP_INTERNAL := /sdcard
+SHRP_OTG := /usb_otg
+# Enable use of flashlight
+SHRP_FLASH := 1
+SHRP_CUSTOM_FLASHLIGHT := true
+SHRP_FONP_1 := /sys/devices/virtual/camera/flash/rear_torch_flash
+# The device's recovery path, dont use blindly
+SHRP_REC := /dev/block/13500000.dwmmc0/by-name/recovery
+# Recovery Type [Only for About Section]
+SHRP_REC_TYPE := Treble
+# Recovery Type [Only for About Section]
+SHRP_DEVICE_TYPE := A_Only
+# SHRP Padding Flag (Only for rounded corner devices.)
+SHRP_STATUSBAR_RIGHT_PADDING := 80
+SHRP_STATUSBAR_LEFT_PADDING := 80
+# SHRP Express, enables on-the-fly theme patching (also persistent) + persistent lock
+SHRP_EXPRESS := true
