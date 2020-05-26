@@ -1,7 +1,7 @@
 [
     {
 	"remote": "github",
-	"repository": "crazo7924/android_kernel_samsung_exynos7904",
+	"repository": "crazo7924/android_kernel_samsung_a30",
 	"target_path": "kernel/samsung/exynos7904",
 	"revision": "master"
     }

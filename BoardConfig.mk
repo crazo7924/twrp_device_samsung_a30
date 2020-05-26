@@ -49,7 +49,7 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-TARGET_KERNEL_SOURCE = kernel/samsung/exynos7904/
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos7904/
 TARGET_KERNEL_CONFIG := exynos7885-a30_defconfig
 
 # Recovery DTBO
