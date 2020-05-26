@@ -16,6 +16,9 @@
 
 DEVICE_PATH := device/samsung/a30
 
+# OTA Assert
+TARGET_OTA_ASSERT_DEVICE := a30,a30dd
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -37,7 +40,7 @@ ENABLE_SCHEDBOOST := true
 ALLOW_MISSING_DEPENDENCIES=true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal7885
+TARGET_BOOTLOADER_BOARD_NAME := universal7904
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
@@ -45,9 +48,13 @@ TARGET_NO_RADIOIMAGE := true
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+TARGET_KERNEL_SOURCE = kernel/samsung/exynos7904/
+TARGET_KERNEL_CONFIG := exynos7885-a30_defconfig
+
+# Recovery DTBO
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/recovery_dtbo
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 
 # mkbootimg arguments
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000
@@ -61,6 +68,9 @@ BOARD_VENDOR := samsung
 TARGET_SOC := exynos7904
 TARGET_BOARD_PLATFORM := exynos5
 TARGET_BOARD_PLATFORM_GPU := mali-g72
+
+# Binder
+TARGET_USES_64_BIT_BINDER := true
 
 # Filesystem
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -80,13 +90,31 @@ TARGET_COPY_OUT_VENDOR := vendor
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
 
+# SEPOLICY
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+
+# Do not go full treble for recovery
+PRODUCT_FULL_TREBLE_OVERRIDE := false
+
+# Add Timezone database
+PRODUCT_COPY_FILES += \
+	system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+
+# VNDK
+BOARD_VNDK_VERSION := current
+
 # TWRP specific build flags
 RECOVERY_VARIANT := twrp
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
+# Add logcat support
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+# Do not set up legacy properties
+TW_NO_LEGACY_PROPS := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 163
+TW_DEFAULT_BRIGHTNESS := 127
 TW_USE_TOOLBOX := true
 TW_Y_OFFSET := 80
 TW_H_OFFSET := -80
@@ -98,5 +126,4 @@ TW_EXTRA_LANGUAGES := true
 TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 PLATFORM_SECURITY_PATCH := 2025-12-31
-
-
+PLATFORM_VERSION := 10.0
