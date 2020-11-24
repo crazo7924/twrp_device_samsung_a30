@@ -37,7 +37,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Build fails without this
-ALLOW_MISSING_DEPENDENCIES=true
+ALLOW_MISSING_DEPENDENCIES := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := universal7904
@@ -49,8 +49,8 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos7904/
-TARGET_KERNEL_CONFIG := exynos7885-a30_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/universal7904-common
+TARGET_KERNEL_CONFIG := a30_defconfig
 
 # Recovery DTBO
 BOARD_INCLUDE_RECOVERY_DTBO := true
@@ -90,15 +90,12 @@ TARGET_COPY_OUT_VENDOR := vendor
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
 
-# SEPOLICY
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
 # Do not go full treble for recovery
 PRODUCT_FULL_TREBLE_OVERRIDE := false
 
 # Add Timezone database
 PRODUCT_COPY_FILES += \
-	system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+	system/timezone/output_data/iana/tzdata:$(TARGET_ROOT_OUT)/system/usr/share/zoneinfo/tzdata
 
 # VNDK
 BOARD_VNDK_VERSION := current
@@ -107,14 +104,11 @@ BOARD_VNDK_VERSION := current
 RECOVERY_VARIANT := twrp
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
-# Add logcat support
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
 # Do not set up legacy properties
 TW_NO_LEGACY_PROPS := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 127
+TW_DEFAULT_BRIGHTNESS := 96
 TW_USE_TOOLBOX := true
 TW_Y_OFFSET := 80
 TW_H_OFFSET := -80
